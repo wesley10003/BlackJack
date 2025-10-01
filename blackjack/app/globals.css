@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+/* Optional design tokens (replaces most of what you'd do in tailwind.config) */
+@theme {
+  /* Colors (you can add more tokens as needed) */
+  --color-background: hsl(0 0% 3%);    /* near-black */
+  --color-foreground: hsl(0 0% 98%);   /* near-white */
+  --color-border: hsl(240 5.9% 90%);
+
+  /* Radius, spacing, etc. if you want:
+  --radius-card: 0.75rem;
+  --space-card: 1rem;
+  */
+}
+
+/* Base “dark” appearance */
+:root { color-scheme: dark; }
+
+/* App body */
+html, body {
+  height: 100%;
+}
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+/* (Optional) Utilities you relied on via config can live here if needed.
+   In most cases, Tailwind’s default utilities are enough. */
