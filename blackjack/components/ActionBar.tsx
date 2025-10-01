@@ -37,7 +37,7 @@ export default function ActionBar({ onHit, onStand, onHelp, disabled, highlight,
             type="button"
             aria-label="Ask AI"
             onClick={onHelp}
-            disabled={aiDisabled || !onHelp}
+            disabled={aiDisabled || !onHelp || disabled}
             className="grid place-items-center h-8 w-8 rounded-full bg-white/10 text-white/80
                        border border-white/15 text-sm hover:bg-white/15 disabled:opacity-40"
           >

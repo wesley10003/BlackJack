@@ -26,6 +26,7 @@ export default function Home() {
   const [aiAction, setAiAction] = useState<string | null>(null);
   const [aiReason, setAiReason] = useState<string | null>(null);
   const [aiLoading, setAiLoading] = useState(false); 
+  const [dealing, setDealing] = useState(false); 
 
 
   const pTotal = useMemo(()=> total(player), [player]);
@@ -88,45 +89,48 @@ export default function Home() {
 
   const deal = async () => {
     if (bet < 1 || bet > chips) return;
+    try {
+      setDealing(true)
+      const d = shuffle(makeDeck());
+      setDeck(d);
+      setPlayer([]); setDealer([]);
+      setResult(null); 
+      setPlayerDone(false);
 
-    const d = shuffle(makeDeck());
-    setDeck(d);
-    setPlayer([]); setDealer([]);
-    setResult(null); 
-    setPlayerDone(false);
+      // 1) player first
+      const p1 = d.pop()!;
+      setPlayer([p1]);
+      await wait(200);
 
-    // 1) player first
-    const p1 = d.pop()!;
-    setPlayer([p1]);
-    await wait(200);
+      // 2) dealer upcard
+      const du = d.pop()!;
+      setDealer([du]);
+      await wait(200);
 
-    // 2) dealer upcard
-    const du = d.pop()!;
-    setDealer([du]);
-    await wait(200);
+      // 3) player second
+      const p2 = d.pop()!;
+      setPlayer(prev => [...prev, p2]);
+      await wait(200);
 
-    // 3) player second
-    const p2 = d.pop()!;
-    setPlayer(prev => [...prev, p2]);
-    await wait(200);
+      const p = [p1, p2];
+      const dl = [du];
 
-    const p = [p1, p2];
-    const dl = [du];
-
-  
-    const pBJ = isBlackjack(p); 
-    const dBJ = isBlackjack(dl);
-    if (pBJ || dBJ) {
-      setPlayerDone(true);
-      if (pBJ && dBJ) { 
-        await finish("PUSH", p, dl); 
+      const pBJ = isBlackjack(p); 
+      const dBJ = isBlackjack(dl);
+      if (pBJ || dBJ) {
+        setPlayerDone(true);
+        if (pBJ && dBJ) { 
+          await finish("PUSH", p, dl); 
+        }
+        else if (pBJ) { 
+          await finish("BLACKJACK", p, dl); 
+        }
+        else { 
+          await finish("LOSE", p, dl); 
+        }
       }
-      else if (pBJ) { 
-        await finish("BLACKJACK", p, dl); 
-      }
-      else { 
-        await finish("LOSE", p, dl); 
-      }
+    } finally {
+      setDealing(false)
     }
   };
 
@@ -261,7 +265,7 @@ export default function Home() {
                 onHit={hit}
                 onStand={stand}
                 onHelp={askAI}
-                disabled={playerDone || !!result}
+                disabled={playerDone || !!result || dealing}
                 highlight={aiAction}
                 thinking={aiLoading}
               />
