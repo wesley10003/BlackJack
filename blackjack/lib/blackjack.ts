@@ -10,7 +10,9 @@ export function makeDeck(): Card[] {
   return d;
 }
 export function shuffle<T>(a: T[]): T[] {
-  for (let i=a.length-1;i>0;i--) { const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  for (let i=a.length-1; i > 0; i--) { 
+    const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]] 
+  }
   return a;
 }
 function value(rank: string): number {
@@ -19,9 +21,18 @@ function value(rank: string): number {
   return parseInt(rank,10);
 }
 export function total(cards: Card[]): number {
-  let sum = 0, aces = 0;
-  for (const c of cards) { if (c.rank==="A") {aces++; sum+=1;} else sum += value(c.rank); }
-  if (aces>0 && sum+10<=21) sum += 10; // one ace as 11
+  let sum = 0
+  let aces = 0;
+  for (const c of cards) { 
+    if (c.rank==="A") {
+      aces++; sum+=1;
+    } else {
+      sum += value(c.rank);
+     } 
+  }
+  if (aces>0 && sum+10<=21) {
+    sum += 10;
+  }
   return sum;
 }
 export function isBlackjack(cards: Card[]) {
@@ -29,7 +40,9 @@ export function isBlackjack(cards: Card[]) {
 }
 export function dealerPlay(start: Card[], deck: Card[]): {cards: Card[]; total: number} {
   const cards = [...start];
-  while (total(cards) < 17) cards.push(deck.pop()!);
+  while (total(cards) < 17) {
+    cards.push(deck.pop()!)
+  }
   return { cards, total: total(cards) };
 }
 export function decide(player: number, dealer: number): Outcome {

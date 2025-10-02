@@ -16,7 +16,7 @@ export default function LoginOtp() {
     setError(null); setInfo(null);
     if (!email) return setError("Please enter your email.");
     setSending(true);
-    // shouldCreateUser: true → creates a new user on first login
+    
     const { error } = await supabase.auth.signInWithOtp({
       email,
       options: { shouldCreateUser: true }
@@ -39,7 +39,7 @@ export default function LoginOtp() {
     const { data, error } = await supabase.auth.verifyOtp({
       email,
       token: code,
-      type: "email", // 'email' is the correct type for email OTP codes
+      type: "email", 
     });
     setVerifying(false);
     if (error) {

@@ -2,7 +2,7 @@
 
 type Props = {
   amount: number | string;
-  onPlus?: () => void;         // open Buy Chips modal
+  onPlus?: () => void;         
   className?: string;
 };
 
@@ -19,7 +19,6 @@ export default function ChipTab({ amount, onPlus, className="" }: Props) {
     >
       <span className="text-sm font-semibold">💰 {amount}</span>
 
-      {/* Plus button */}
       <button
         type="button"
         aria-label="Buy chips"

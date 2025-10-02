@@ -15,15 +15,12 @@ export default function BuyChipsWindow({ open, onClose, onBuy }: Props) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* Backdrop */}
       <div
         className="absolute inset-0 bg-black/70 backdrop-blur-sm"
         onClick={onClose}
       />
 
-      {/* Modal */}
       <div className="relative z-10 w-full max-w-md rounded-2xl border border-white/10 bg-black p-6 shadow-xl">
-        {/* Header */}
         <div className="mb-4 flex items-start justify-between">
           <div>
             <h2 className="text-lg font-semibold">Buy Chips</h2>
@@ -51,22 +48,6 @@ export default function BuyChipsWindow({ open, onClose, onBuy }: Props) {
             </button>
           ))}
         </div>
-
-        {/* Footer
-        <button
-          onClick={() => {
-            if (selected) {
-              onBuy(selected);
-              setSelected(null);
-              onClose();
-            }
-          }}
-          disabled={!selected}
-          className="mt-6 h-12 w-full rounded-xl bg-white text-black font-medium 
-                     disabled:opacity-40 transition hover:opacity-90"
-        >
-          Place Bet
-        </button> */}
       </div>
     </div>
   );

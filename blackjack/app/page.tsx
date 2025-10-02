@@ -160,7 +160,7 @@ export default function Home() {
       const c = d.pop()!;
       dCards = [...dCards, c];
       setDealer(dCards);
-      await wait(200);   
+      await wait(250);   
     }
     setDeck(d);
 
@@ -175,7 +175,7 @@ export default function Home() {
     const net = outcome==="WIN" ? bet : outcome==="BLACKJACK" ? Math.floor(1.5*bet) : outcome==="LOSE" ? -bet : 0;
     setChips(c => c + net);
 
-    // send to server with user token so RLS applies
+    // send to server with user token
     const { data: { session } } = await supabase.auth.getSession();
     const token = session?.access_token;
     await fetch("/api/game-result", {
@@ -256,8 +256,8 @@ export default function Home() {
           {!result ? (playerDone ? (<BettingSection
             bet={bet}
             setBet={setBet}
-            onPlace={deal}        // your deal/start round fn
-            disabled={bet < 1 || bet > chips || !!player.length} // disable while a hand is active
+            onPlace={deal}       
+            disabled={bet < 1 || bet > chips || !!player.length}
             max={chips}
           />) : (
             <div className="mt-4 flex flex-col items-center">

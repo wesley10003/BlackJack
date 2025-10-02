@@ -5,7 +5,6 @@ import { Card } from "@/lib/blackjack"
 
 export default function Hand({cards, slots = 2}: {cards: Card[], slots?: number}) {
 
-  // Build a fixed-length array: real cards first, then nulls as placeholders
   const shown: (Card | null)[] = Array.from({ length: Math.max(slots, cards.length) })
     .map((_, i) => (i < cards.length ? cards[i] : null));
 

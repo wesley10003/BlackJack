@@ -4,8 +4,8 @@
 import { motion } from "framer-motion";
 
 type Props = {
-  action?: string | null;  // e.g., "Hit" | "Stand"
-  reason?: string | null;  // short explanation
+  action?: string | null;  
+  reason?: string | null;  
 };
 
 export default function AISuggestion({ action, reason }: Props) {

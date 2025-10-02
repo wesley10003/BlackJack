@@ -4,8 +4,8 @@
 type Props = {
   onHit: () => void;
   onStand: () => void;
-  onHelp?: () => void;          // AI hint or rules modal
-  disabled?: boolean;           // disable during dealer turn / network calls
+  onHelp?: () => void;          
+  disabled?: boolean;           
   highlight?: string | null;
   aiDisabled?: boolean
   thinking?: boolean

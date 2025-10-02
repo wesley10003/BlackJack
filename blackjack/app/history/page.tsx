@@ -53,11 +53,12 @@ export default function History() {
               <TableCell>{r.dealer_total}</TableCell>
               <TableCell className={
                 r.result==="WIN"||r.result==="BLACKJACK" ? "text-green-400" :
-                r.result==="LOSE" ? "text-red-400" : ""
+                r.result==="LOSE" ? "text-red-400" : 
+                r.result==="PUSH" ? "text-orange-400" : ""
               }>{r.result}</TableCell>
               <TableCell>{r.bet}</TableCell>
-              <TableCell className={r.net_change>=0?"text-green-400":"text-red-400"}>
-                {r.net_change>=0?"+":""}{r.net_change}
+              <TableCell className={r.net_change > 0?"text-green-400": r.net_change < 0 ?"text-red-400" : "text-orange-400"}>
+                {r.net_change >=0 ? "+" : ""}{r.net_change}
               </TableCell>
             </TableRow>
           ))}

@@ -14,7 +14,6 @@ export default function BettingSection({ bet, setBet, onPlace, disabled, max }: 
 
   return (
     <div className="w-auto max-w-xs mx-auto mt-10 space-y-3 text-center">
-      {/* Amount input */}
       <input
         type="number"
         value={bet ? bet : ""}
@@ -23,7 +22,6 @@ export default function BettingSection({ bet, setBet, onPlace, disabled, max }: 
                    text-white outline-none ring-0 focus:border-white/30"
       />
 
-      {/* Quick add chips */}
       <div className="grid grid-cols-3 gap-3">
         <button
           type="button"
@@ -51,7 +49,6 @@ export default function BettingSection({ bet, setBet, onPlace, disabled, max }: 
         </button>
       </div>
 
-      {/* Place Bet */}
       <button
         type="button"
         onClick={onPlace}

@@ -11,7 +11,6 @@ export default function Nav() {
   const [showBuy, setShowBuy] = useState(false);
   const [chips, setChips] = useState<number>(0);
 
-  // auth gate + fetch chips
   useEffect(() => {
     supabase.auth.getSession().then(({data}) => {
       if (!data.session) { 
@@ -50,11 +49,8 @@ export default function Nav() {
       return;
     }
 
-    // Source of truth from the DB
     setChips(json.chips);
   };
-
-
 
 
   return (
