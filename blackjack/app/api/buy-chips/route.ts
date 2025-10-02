@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 
+type AddChipsRow = { chips: number };
+
 export async function POST(req: NextRequest) {
   const { amount } = await req.json();
 
@@ -30,11 +32,12 @@ export async function POST(req: NextRequest) {
   }
 
   // Atomic increment and return the new chips value
-  const { data, error } = await supabase.rpc("add_chips", { x: delta }).single();
-  if (error) {
-    console.error("add_chips error:", error);
+  const { data, error } = await supabase
+  .rpc("add_chips", { x: delta })
+  .single<{ chips: number }>();
+
+  if (error || !data) {
     return NextResponse.json({ error: "Update failed" }, { status: 500 });
   }
-
   return NextResponse.json({ ok: true, chips: data.chips });
 }
